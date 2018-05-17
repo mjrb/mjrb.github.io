@@ -1,0 +1,24 @@
+<html>
+  <head>
+    <script src="https://s3.amazonaws.com/stitch-sdks/js/library/v3/stable/stitch.min.js"></script>
+    <script>
+      const clientPromise = stitch.StitchClientFactory.create('calcgoggles-qwpga');
+      clientPromise.then(client => {
+        const db = client.service('mongodb', 'mongodb-atlas').db('test');
+        client.login().then(() =>
+      db.collection('things').updateOne({owner_id: client.authedId()}, {$set:{number:42}}, {upsert:true})
+	).then(()=>
+	  db.collection('things').find({owner_id: client.authedId()}).limit(100).execute()
+	).then(docs => {
+	  console.log("Found docs", docs)
+	  console.log("[MongoDB Stitch] Connected to Stitch")
+	}).catch(err => {
+	  console.error(err)
+	});
+      });
+      console.log(location.origin);
+    </script>
+  </head>
+  <body>
+  </body>
+</html>
