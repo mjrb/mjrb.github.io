@@ -6,7 +6,9 @@
       const clientPromise = stitch.StitchClientFactory.create('calcgoggles-qwpga');
       clientPromise.then(stitchClient => {
         client=stitchClient;
+        if(!client.isAuthenticated()){
         client.authenticate("google", {redirectUrl:"https://mjrb.github.io/test.html"});
+        }
       }).then(()=>console.log("successful authentication ",client));
       console.log(location.origin);
     </script>
