@@ -7,7 +7,7 @@
       clientPromise.then(stitchClient => {
         client=stitchClient;
         if(!client.isAuthenticated()){
-        client.authenticate("google", {redirectUrl:"https://mjrb.github.io/test.html"});
+          location.href="https://mjrb.github.io/login.html";
         }
       }).then(()=>console.log("successful authentication ",client));
       console.log(location.origin);
