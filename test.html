@@ -8,7 +8,7 @@
       clientPromise.then(stitchClient => {
           client=stitchClient;
           if(!client.isAuthenticated()){
-              location.href="https://mjrb.github.io/login.html";
+              window.location.replace("https://mjrb.github.io/login.html");
           }
       }).then(()=>console.log("successful authentication ",client));
 	  console.log(client);
@@ -18,7 +18,7 @@
           stitch.StitchClientFactory.create("calcgoggles-qwpga")
               .then(client => {
 		  client.logout();
-		  location.href="https://mjrb.github.io/login.html"
+		  window.location.replace("https://mjrb.github.io/login.html")
 	      });
       }
     </script>

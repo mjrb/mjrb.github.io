@@ -16,7 +16,7 @@
         if(!client.isAuthenticated()){
           client.login(user,pass)
             .then(userId => {
-              location.href="https://mjrb.github.io/test.html"
+              window.location.replace("https://mjrb.github.io/test.html")
             })
             .catch(err => {
               alert("bad username or password :(");
