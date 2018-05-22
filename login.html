@@ -6,24 +6,27 @@
     <script src="https://s3.amazonaws.com/stitch-sdks/js/library/v3/stable/stitch.min.js"></script>
     <script>
       function submit(){
-      let client;
-      const clientPromise = stitch.StitchClientFactory.create('calcgoggles-qwpga');
-      clientPromise.then(stitchClient => {
-        client=stitchClient;
-        let user=document.getElementById("uname").value;
-        let pass=document.getElementById("pass").value;
-        console.log(user," ",pass);
-        if(!client.isAuthenticated()){
-          client.login(user,pass)
-            .then(userId => {
-              window.location.replace("https://mjrb.github.io/test.html")
-            })
-            .catch(err => {
-              alert("bad username or password :(");
-            });
-        }
-      }).then(()=>console.log("successful authentication ",client));
-      console.log(location.origin);
+	  let client;
+	  const clientPromise = stitch.StitchClientFactory.create('calcgoggles-qwpga');
+	  clientPromise.then(stitchClient => {
+              client=stitchClient;
+              let user=document.getElementById("uname").value;
+              let pass=document.getElementById("pass").value;
+              console.log(user," ",pass);
+              if(!client.isAuthenticated()){
+		  client.login(user,pass)
+		      .then(userId => {
+			  window.location.replace("https://mjrb.github.io/test.html")
+			  console.log("success");
+		      })
+		      .catch(err => {
+			  alert("bad username or password :(");
+			  console.log("fail");
+		      });
+              }else{
+		  window.location.replace("https://mjrb.github.io/test.html")
+	      }
+	  });
       }
     </script>
   </body>
