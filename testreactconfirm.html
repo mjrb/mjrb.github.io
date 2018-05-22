@@ -1,0 +1,18 @@
+<html>
+  <body>
+    <script src="https://s3.amazonaws.com/stitch-sdks/js/library/v3/stable/stitch.min.js"></script>
+    <script>
+    stitch.StitchClientFactory
+    .create("testreact-xyknf")
+    .then(sclient=>{
+	let url=new URL(window.location.href)
+	let tokenid=url.searchParams.get("tokenId")
+	let token=url.searchParams.get("token")
+	
+	return sclient.auth.provider("userpass").emailconfirm(tokenid,token)	
+    })
+    .then(()=>window.location.replace("https://mjrb.github.io/testreact.html"))
+    .catch(()=>alert("error confirming email"));
+    </script>
+  </body>
+</html>

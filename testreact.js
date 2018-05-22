@@ -11,13 +11,30 @@
 		    loginFunc(user,pass);
 		}
 	    }
-	    return(
-		e("div",{className:"login-box"},
-		  "username:",e("input",{id:"uname",type:"test"}),br,
-		  "password:",e("input",{id:"pass",type:"password"}),br,
-		  e("button",{onClick:login(this.props.loginFunc)},"login")
-		 )
-	    )
+	    function register(registerFunc){
+		return function(){
+		    let user=document.getElementById("uname").value;
+		    let pass=document.getElementById("pass").value;
+		    registerFunc(user,pass);
+		}
+	    }
+	    function reset(resetFunc){
+		return function(){
+		    let user=document.getElementById("uname").value;
+		    if(user==""){
+			alert("please enter username to send reset link");
+		    }else{
+			resetFunc(user);
+		    }
+		}
+	    }
+	    return e("div",{className:"login-box"},
+		     "username:",e("input",{id:"uname",type:"test"}),br,
+		     "password:",e("input",{id:"pass",type:"password"}),br,
+		     e("button",{onClick:login(this.props.loginFunc)},"login"),
+		     e("button",{onClick:register(this.props.registerFunc)},"register"),
+		     e("button",{onClick:reset(this.props.resetFunc)},"reset password"),
+		    )
 	}
     }
     
@@ -39,15 +56,37 @@
 		    });
 	    }
 	}
+	register(client){
+	    return function(user, pass){
+		client.register(user,pass)
+		    .then(userId =>{
+			alert("confirmation email sent!");
+		    }).catch(err => {
+			alert("bad password or username is taken. password must be 6 to 128 characters");
+			console.log(err);
+		    });
+	    }
+	}
 	logout(client){
 	    return function(){
 		client.logout();
 		this.setState({authed:false});
 	    }
 	}
+	reset(client){
+	    return function(user){
+		client.auth.provider('userpass').sendPasswordReset(user);
+		    .then(()=>alert("reset link sent!"))
+		    .catch(()=>alert("failed to send reset link"));
+	    }
+	}
 	render(){
 	    if(!this.state.authed){
-		return e(Login,{loginFunc:this.login(this.props.sclient).bind(this)},null)
+		return e(Login,{
+		    loginFunc:this.login(this.props.sclient).bind(this),
+		    registerFunc:this.register(this.props.sclient).bind(this)
+		    resetFunc:this.reset(this.props.sclient).bind(this)
+		},null)
 	    }else{
 		return e(App,{
 		    sclient:this.props.sclient,
@@ -82,6 +121,7 @@
 	    super();
 	    let atlas=props.sclient.service("mongodb","mongodb-atlas");
 	    this.notes=atlas.db("test").collection("notes");
+	    props.sclient.executeFunction("markAsTestreact");
 	    this.state={
 		notes:[]
 	    };
@@ -126,7 +166,7 @@
     }
     
     stitch.StitchClientFactory
-	.create("calcgoggles-qwpga")
+	.create("testreact-xyknf")
 	.then(sclient=>{
 	    ReactDOM.render(
 		e(AuthContainer,{sclient},null),
