@@ -1,0 +1,25 @@
+<html>
+    <body>
+    new password: <input id="pass" type="password">
+    <button onclick="reset()">reset password!</button>
+    <script src="https://s3.amazonaws.com/stitch-sdks/js/library/v3/stable/stitch.min.js"></script>
+    <script>
+    function reset(){
+	stitch.StitchClientFactory
+	    .create("testreact-xyknf")
+	    .then(sclient=>{
+		let url=new URL(window.location.href)
+		let tokenid=url.searchParams.get("tokenId")
+		let token=url.searchParams.get("token")
+		let newPass=document.getElementById("pass").value;
+		sclient.auth.provider("userpass").passwordReset(tokenid,token,newPass)
+		    .then(()=>{
+			alert("password reset!");
+			window.location.replace("https://mjrb.github.io/testreact.html");
+		    })
+		    .catch(console.log);
+	    });
+    }
+    </script>
+  </body>
+</html>
