@@ -1,18 +1,11 @@
 <html>
   <body>
-    <script src="https://s3.amazonaws.com/stitch-sdks/js/library/v3/stable/stitch.min.js"></script>
-    <script>
-    stitch.StitchClientFactory
-    .create("testreact-xyknf")
-    .then(sclient=>{
-	let url=new URL(window.location.href)
-	let tokenid=url.searchParams.get("tokenId")
-	let token=url.searchParams.get("token")
-	
-	return sclient.auth.provider("userpass").emailconfirm(tokenid,token)	
-    })
-    .then(()=>window.location.replace("https://mjrb.github.io/testreact.html"))
-    .catch(err=>{alert("error confirming email");console.log(err)});
-    </script>
+    <h1>Mickey J's demo site!</h1>
+    <h2>under construction</h2>
+    <a href="https://github.com/mjrb">My Github!</a>
+    <a href="https://mjrb.github.io/testreact.html">
+      <h3>Example MongoDB Stitch app</h3>
+    </a>
+    <p>This is a simple react app where you can add and remove notes from a list. It uses mongodb stitch for user authentication, and db access. It also uses a feild validation to prevent adding empty notes!</p>
   </body>
 </html>
