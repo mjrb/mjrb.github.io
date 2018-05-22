@@ -12,7 +12,7 @@
 	return sclient.auth.provider("userpass").emailconfirm(tokenid,token)	
     })
     .then(()=>window.location.replace("https://mjrb.github.io/testreact.html"))
-    .catch(()=>alert("error confirming email"));
+    .catch(err=>{alert("error confirming email");console.log(err)});
     </script>
   </body>
 </html>
