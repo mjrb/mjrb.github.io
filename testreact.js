@@ -127,19 +127,25 @@
 	    this.updateNotes(props,this);
 	}
 	addNote(){
-	    let text=document.getElementById("text").value;
-	    this.notes
-		.insertOne({text,owner_id:this.props.sclient.authedId()})
-		.then(()=>{
-		    this.updateNotes(this.props,this);
-		    console.log("addnote",text);
-		}).catch(err=>{
-		    if(err.message=="validation failed for field 'text'"){
-			alert("can't add blank note");
-		    }else{
-			console.log(err);
-		    }
-		});
+	    this.props.sclient.executeFunction("reachedMaxNotes").then(reachedMax=>{
+		if(reachedMax){
+		    alert("you have reached the maximum amount of notes. sorry :(");
+		    return;
+		}
+		let text=document.getElementById("text").value;
+		this.notes
+		    .insertOne({text,owner_id:this.props.sclient.authedId()})
+		    .then(()=>{
+			this.updateNotes(this.props,this);
+			console.log("addnote",text);
+		    }).catch(err=>{
+			if(err.message=="validation failed for field 'text'"){
+			    alert("can't add blank note");
+			}else{
+			    console.log(err);
+			}
+		    });
+	    });
 	}
 	removeNote(_id){
 	    return (function(){
