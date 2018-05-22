@@ -75,7 +75,7 @@
 	}
 	reset(client){
 	    return function(user){
-		client.auth.provider('userpass').sendPasswordReset(user);
+		client.auth.provider('userpass').sendPasswordReset(user)
 		    .then(()=>alert("reset link sent!"))
 		    .catch(()=>alert("failed to send reset link"));
 	    }
@@ -84,7 +84,7 @@
 	    if(!this.state.authed){
 		return e(Login,{
 		    loginFunc:this.login(this.props.sclient).bind(this),
-		    registerFunc:this.register(this.props.sclient).bind(this)
+		    registerFunc:this.register(this.props.sclient).bind(this),
 		    resetFunc:this.reset(this.props.sclient).bind(this)
 		},null)
 	    }else{
