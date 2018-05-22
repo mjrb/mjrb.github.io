@@ -1,18 +1,35 @@
 <html>
-  <body>
+    <body>
+    email: <input id="email" type="text">
+    <button onclick="anothaone()">send another confirmation email!</button>
     <script src="https://s3.amazonaws.com/stitch-sdks/js/library/v3/stable/stitch.min.js"></script>
     <script>
-    stitch.StitchClientFactory
-    .create("testreact-xyknf")
-    .then(sclient=>{
-	let url=new URL(window.location.href)
-	let tokenid=url.searchParams.get("tokenId")
-	let token=url.searchParams.get("token")
-	
-	return sclient.auth.provider("userpass").emailconfirm(tokenid,token)	
-    })
-    .then(()=>window.location.replace("https://mjrb.github.io/testreact.html"))
-    .catch(err=>{alert("error confirming email");console.log(err)});
+    (function(){
+	stitch.StitchClientFactory
+	    .create("testreact-xyknf")
+	    .then(sclient=>{
+		let url=new URL(window.location.href)
+		let tokenid=url.searchParams.get("tokenId")
+		let token=url.searchParams.get("token")
+		if(tokenid!=null&&token!=null){
+		    console.log(token,"-----------------",tokenid);
+		    
+		    sclient.auth.provider("userpass").emailConfirm(tokenid,token)
+			.then(()=>window.location.replace("https://mjrb.github.io/testreact.html"))
+			.catch(alert);
+		}
+	    });
+    })();
+    function anothaone(){
+	stitch.StitchClientFactory
+	    .create("testreact-xyknf")
+	    .then(sclient=>{
+		let email=document.getElementById("email").value;
+		sclient.auth.provider("userpass").sendEmailConfirm(email)
+		    .then(()=>alert("confirmation email sent!"))
+		    .catch(console.log);
+	    });
+    }
     </script>
   </body>
 </html>

@@ -121,7 +121,6 @@
 	    super();
 	    let atlas=props.sclient.service("mongodb","mongodb-atlas");
 	    this.notes=atlas.db("test").collection("notes");
-	    props.sclient.executeFunction("markAsTestreact");
 	    this.state={
 		notes:[]
 	    };
