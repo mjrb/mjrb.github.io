@@ -1,0 +1,35 @@
+<html>
+    <body>
+    email: <input id="email" type="text">
+    <button onclick="anothaone()">send another confirmation email!</button>
+    <script src="https://s3.amazonaws.com/stitch-sdks/js/library/v3/stable/stitch.min.js"></script>
+    <script>
+    (function(){
+	stitch.StitchClientFactory
+	    .create("calcgoggles-qwpga")
+	    .then(sclient=>{
+		let url=new URL(window.location.href)
+		let tokenid=url.searchParams.get("tokenId")
+		let token=url.searchParams.get("token")
+		if(tokenid!=null&&token!=null){
+		    console.log(token,"-----------------",tokenid);
+		    
+		    sclient.auth.provider("userpass").emailConfirm(tokenid,token)
+			.then(alert("your email is now verified! now you can go back and login :)"))
+			.catch(alert);
+		}
+	    });
+    })();
+    function anothaone(){
+	stitch.StitchClientFactory
+	    .create("testreact-xyknf")
+	    .then(sclient=>{
+		let email=document.getElementById("email").value;
+		sclient.auth.provider("userpass").sendEmailConfirm(email)
+		    .then(()=>alert("confirmation email sent!"))
+		    .catch(console.log);
+	    });
+    }
+    </script>
+  </body>
+</html>
