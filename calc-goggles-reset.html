@@ -15,7 +15,6 @@
 		sclient.auth.provider("userpass").passwordReset(tokenid,token,newPass)
 		    .then(()=>{
 			alert("your password is now reset! now you can go back and login :)");
-			window.location.replace("https://mjrb.github.io/testreact.html");
 		    })
 		    .catch(alert);
 	    }).catch(alert);
