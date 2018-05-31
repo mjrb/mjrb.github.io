@@ -1,1 +1,0 @@
-{:output-wrapper false, :externs ["closure-js/externs"], :libs ["closure-js/libs"], :main calc-goggles.core, :asset-path "js/compiled/out", :output-to "resources/public/js/compiled/calc_goggles.js", :output-dir "resources/public/js/compiled/out", :source-map-timestamp true, :preloads [devtools.preload]}
