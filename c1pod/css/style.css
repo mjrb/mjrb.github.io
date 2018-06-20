@@ -1,0 +1,78 @@
+/* some style */
+.popup-box {
+    position: absolute;
+    background: #6c757d;
+    color: white;
+    border-radius: 7px;
+    top: 40px;
+    padding: 10px;
+    filter: blur(0px);
+}
+.popup-box {
+    position: absolute;
+    background: #6c757d;
+    color: white;
+    border-radius: 7px;
+    top: 40px;
+    padding: 10px;
+    filter: blur(0px);
+}
+.blur {
+    filter: blur(2px);
+}
+.noblur{
+    filter: blur(0px);
+}
+.searchbar{
+    background: #333333;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+.toolbar{
+    padding-bottom: 24px;
+}
+.login-err{
+    margin-top: 10px;
+}
+.invisible{
+    display: none;
+}
+.tagbar{
+    display: flex;
+    direction: row;
+    justify-content:center;
+    flex-wrap: wrap;
+}
+.nowrap{
+   white-space: nowrap;
+}
+.tag-component{
+    margin-left: 5px;
+    background: rgb(209,236,241);
+    border-color: rgb(190,229,235);
+    color: rgb(12,84,96);
+    padding: 8px;
+    border-radius: 3px;
+    margin-bottom: 30px;
+}
+.thumbnail{
+    height:100px;
+    width:100px;
+}
+.auth-buttons{
+    display: flex;
+    direction: row;
+    flex-wrap: nowrap;
+}
+#sub-tools{
+    display: flex;
+    direction: row;
+    justify-content: left;
+    flex-wrap: wrap;
+}
+#sub-tools h2{
+    margin-left: 5px;
+}
+.episode-list-buttons{
+    margin-left: 5px;
+}
