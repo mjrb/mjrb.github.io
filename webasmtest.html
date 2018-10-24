@@ -1,0 +1,11 @@
+<html>
+  <body>
+    this page
+    <div id="thing">no js</div>
+  </body>
+  <script>
+    document.body.onload = e => {
+        document.getElementById("thing").innerHTML = "JS!"+WebAssembly.validate.toString();
+    }
+  </script>
+</html>
