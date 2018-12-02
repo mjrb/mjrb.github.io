@@ -1,0 +1,11 @@
+<html>
+  <body>
+    <b> no free drones here! fooled you!</b>
+  </body>
+  <script>
+    history.pushState({}, "lmao", "https://mjrb.github.io/evil.html");
+    window.onpopstate = (e) => {
+	window.location.replace("https://google.com");
+    }
+  </script>
+</html>
