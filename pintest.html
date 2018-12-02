@@ -1,0 +1,38 @@
+<html>
+  <style>
+    #pointer {
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      width: 10px;
+      heigth: 20px;
+    }
+    body {
+      margin: 40px;
+    }
+  </style>
+  <body>
+    <img id="pointer" src="https://banner2.kisspng.com/20180326/poq/kisspng-google-map-maker-google-maps-computer-icons-pin-5ab9097f83a015.1398912115220760315391.jpg">
+    <img id="map" src="https://www.mapsofworld.com/usa/usa-maps/united-states-map.jpg" />
+    <button onclick="alert(getPointer());">get position</button>
+  <script>
+    let map = document.querySelector("#map");
+    let pointer = document.querySelector("#pointer");
+    const setPointer = (x, y) => {
+	console.log(x, y);
+	pointer.style = `left:${x - 5};top:${y - 15}`;
+    };
+    const getPointer = () => {
+	let x = pointer.offsetLeft - map.offsetLeft;
+	let y = pointer.offsetTop - map.offsetTop;
+	return [x/map.width, y/map.height];
+    };
+    window.onload = () =>{
+	map.onclick = e => {
+            console.log(e);
+            setPointer(e.layerX, e.layerY);
+	};
+    };
+  </script>
+  </body>
+</html>
